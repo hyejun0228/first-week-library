@@ -1,3 +1,4 @@
+import model.Library;
 import screen.*;
 
 import java.util.Scanner;
@@ -5,6 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Library library = new Library();
 
         MemberRegisterScreen memberRegisterScreen = new MemberRegisterScreen();
         BookRegisterScreen bookRegisterScreen = new BookRegisterScreen();
@@ -20,7 +22,7 @@ public class Main {
             scanner.nextLine();
 
             if (menu == 1) {
-                memberRegisterScreen.show(scanner);
+                memberRegisterScreen.show(scanner, library);
             } else if (menu == 2) {
                 bookRegisterScreen.show(scanner);
             } else if (menu == 3) {
