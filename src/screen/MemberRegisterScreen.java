@@ -1,10 +1,10 @@
 package screen;
 
+import java.util.Scanner;
+
 import model.AdultMember;
 import model.ChildMember;
 import model.Library;
-
-import java.util.Scanner;
 
 public class MemberRegisterScreen {
     public void show(Scanner scanner, Library library) {
