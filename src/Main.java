@@ -24,15 +24,15 @@ public class Main {
             if (menu == 1) {
                 memberRegisterScreen.show(scanner, library);
             } else if (menu == 2) {
-                bookRegisterScreen.show(scanner);
+                bookRegisterScreen.show(scanner, library);
             } else if (menu == 3) {
-                bookListScreen.show(scanner);
+                bookListScreen.show(library);
             } else if (menu == 4) {
-                memberListScreen.show(scanner);
+                memberListScreen.show(library);
             } else if (menu == 5) {
-                bookBorrowScreen.show(scanner);
+                bookBorrowScreen.show(scanner, library);
             } else if (menu == 6) {
-                bookReturnScreen.show(scanner);
+                bookReturnScreen.show(scanner, library);
             } else if (menu == 7) {
                 System.out.println("프로그램을 종료합니다.");
                 break;

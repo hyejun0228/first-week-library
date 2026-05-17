@@ -21,6 +21,11 @@ public class MemberRegisterScreen {
 
         System.out.print("회원 번호: 나중에 자동으로 바꾸자..");
         String memberId = scanner.nextLine();
+        if (library.findMemberById(memberId) != null) {
+            System.out.println("이미 존재하는 회원 번호입니다.");
+            System.out.println("회원 등록을 취소합니다.");
+            return;
+        }
 
         System.out.print("회원 이름: ");
         String name = scanner.nextLine();
