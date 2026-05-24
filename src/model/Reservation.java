@@ -3,7 +3,13 @@ package model;
 public class Reservation {
 	private Member member;
 	private Book book;
-	private boolean bookNotification;
+	private boolean notified;
+
+	public Reservation(Member member, Book book) {
+		this.member = member;
+		this.book = book;
+		this.notified = false;
+	}
 
 	public Member getMember() {
 		return member;
@@ -13,13 +19,11 @@ public class Reservation {
 		return book;
 	}
 
-	public boolean isBookNotification() {
-		return bookNotification;
+	public boolean isNotified() {
+		return notified;
 	}
 
-	public void setBookNotification() {
-		bookNotification = true;
+	public void notifyComplete() {
+		this.notified = true;
 	}
-
-
 }

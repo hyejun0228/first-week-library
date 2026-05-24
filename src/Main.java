@@ -1,7 +1,13 @@
-import model.Library;
-import screen.*;
-
 import java.util.Scanner;
+
+import model.Library;
+import screen.BookBorrowScreen;
+import screen.BookListScreen;
+import screen.BookRegisterScreen;
+import screen.BookReturnScreen;
+import screen.MemberListScreen;
+import screen.MemberRegisterScreen;
+import thread.NotificationThread;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,6 +20,9 @@ public class Main {
         MemberListScreen memberListScreen = new MemberListScreen();
         BookBorrowScreen bookBorrowScreen = new BookBorrowScreen();
         BookReturnScreen bookReturnScreen = new BookReturnScreen();
+
+        NotificationThread notificationThread = new NotificationThread(library);
+        notificationThread.start();
 
         while (true) {
             printMainMenu();
@@ -35,6 +44,7 @@ public class Main {
                 bookReturnScreen.show(scanner, library);
             } else if (menu == 7) {
                 System.out.println("프로그램을 종료합니다.");
+                notificationThread.stopThread();
                 break;
             } else {
                 System.out.println("잘못된 입력입니다.");

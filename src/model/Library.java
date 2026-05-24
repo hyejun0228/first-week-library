@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class Library {
     private ArrayList<Book> books;
     private ArrayList<Member> members;
+    private ArrayList<Reservation> reservations;
 
     public Library() {
         books = new ArrayList<>();
         members = new ArrayList<>();
+        reservations = new ArrayList<>();
     }
 
     public void addBook(Book book) {
@@ -55,7 +57,7 @@ public class Library {
         }
     }
 
-    public void borrowBook(String memberId, String bookId) {
+    public synchronized void borrowBook(String memberId, String bookId) {
         Member member = findMemberById(memberId);
         Book book = findBookById(bookId);
 
@@ -71,6 +73,7 @@ public class Library {
 
         if (book.isBorrowed()) {
             System.out.println("이미 대여 중인 도서입니다.");
+            reserveBook(memberId, bookId);
             return;
         }
 
@@ -84,7 +87,7 @@ public class Library {
         System.out.println("도서 대여가 완료되었습니다.");
     }
 
-    public void returnBook(String memberId, String bookId) {
+    public synchronized void returnBook(String memberId, String bookId) {
         Member member = findMemberById(memberId);
         Book book = findBookById(bookId);
 
@@ -123,5 +126,47 @@ public class Library {
         }
 
         return null;
+    }
+
+    public synchronized void reserveBook(String memberId, String bookId) {
+        Member member = findMemberById(memberId);
+        Book book = findBookById(bookId);
+
+        if (member == null) {
+            System.out.println("존재하지 않는 회원입니다.");
+            return;
+        }
+
+        if (book == null) {
+            System.out.println("존재하지 않는 도서입니다.");
+            return;
+        }
+
+        if (!book.isBorrowed()) {
+            System.out.println("대여 가능한 도서입니댜.");
+            return;
+        }
+
+        for (Reservation reservation : reservations) {
+            if (reservation.getBook().equals(book) && reservation.getMember().equals(member)) {
+                System.out.println("이미 예약한 도서입니다.");
+                return;
+            }
+        }
+
+        reservations.add(new Reservation(member, book));
+        System.out.println("도서 예약이 완료되었습니다.");
+    }
+
+    public synchronized void checkReservationNotifications() {
+        for (Reservation reservation : reservations) {
+            Book book = reservation.getBook();
+
+            if (!book.isBorrowed() && !reservation.isNotified()) {
+                System.out.println();
+                System.out.println("[알림] " + reservation.getMember().getMemberId() + " 회원님, 예약하신 도서가 반납되었습니다.");
+                reservation.notifyComplete();
+            }
+        }
     }
 }
