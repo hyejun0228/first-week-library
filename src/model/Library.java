@@ -120,6 +120,11 @@ public class Library {
             return;
         }
 
+        if (!member.hasBorrowedBook(book)) {
+            System.out.println("대여한 도서가 아닙니다.");
+            return;
+        }
+
         member.removeBorrowedBook(book);
         book.returnBook();
 

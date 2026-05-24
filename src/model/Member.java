@@ -51,4 +51,8 @@ public class Member extends Person {
     public boolean isBorrowed(Book book) {
         return borrowedBooks.contains(book);
     }
+
+    public boolean hasBorrowedBook(Book book) {
+        return borrowedBooks.contains(book);
+    }
 }
