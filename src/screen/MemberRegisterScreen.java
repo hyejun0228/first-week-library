@@ -31,7 +31,6 @@ public class MemberRegisterScreen {
         }
 
         String memberId = library.createMemberId();
-        System.out.print("회원 번호: 나중에 자동으로 바꾸자..");
 
         System.out.print("회원 이름: ");
         String name = scanner.nextLine();

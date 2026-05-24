@@ -1,17 +1,19 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Library {
-    private ArrayList<Book> books;
-    private ArrayList<Member> members;
+    private Map<String , Book> books;
+    private Map<String, Member> members;
     private ArrayList<Reservation> reservations;
     private int memberIdSequence;
     private int bookIdSequence;
 
     public Library() {
-        books = new ArrayList<>();
-        members = new ArrayList<>();
+        books = new HashMap<>();
+        members = new HashMap<>();
         reservations = new ArrayList<>();
         memberIdSequence = 1;
         bookIdSequence = 1;
@@ -33,7 +35,7 @@ public class Library {
             return;
         }
 
-        books.add(book);
+        books.put(book.getBookId(), book);
         System.out.println("도서가 등록되었습니다.");
     }
 
@@ -43,7 +45,7 @@ public class Library {
             return;
         }
 
-        members.add(member);
+        members.put(member.getMemberId(), member);
         System.out.println("회원이 등록되었습니다.");
     }
 
@@ -53,7 +55,7 @@ public class Library {
             return;
         }
 
-        for (Book book : books) {
+        for (Book book : books.values()) {
             book.showBookInfo();
             System.out.println("----------------------");
         }
@@ -65,7 +67,7 @@ public class Library {
             return;
         }
 
-        for (Member member : members) {
+        for (Member member : members.values()) {
             member.showMemberInfo();
             System.out.println("----------------------");
         }
@@ -132,23 +134,11 @@ public class Library {
     }
 
     public Book findBookById(String bookId) {
-        for (Book book : books) {
-            if (book.getBookId().equals(bookId)) {
-                return book;
-            }
-        }
-
-        return null;
+        return books.get(bookId);
     }
 
     public Member findMemberById(String memberId) {
-        for (Member member : members) {
-            if (member.getMemberId().equals(memberId)) {
-                return member;
-            }
-        }
-
-        return null;
+        return members.get(memberId);
     }
 
     public synchronized void reserveBook(String memberId, String bookId) {
