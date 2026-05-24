@@ -16,8 +16,8 @@ public class MemberRegisterScreen {
         System.out.println("2. 어른 회원");
         System.out.println("회원 종류룰 선택하세요: ");
 
-        int memberType = scanner.nextInt();
-        scanner.nextLine();
+        String memberTypeString = scanner.nextLine();
+        int memberType = Integer.parseInt(memberTypeString);
 
         System.out.print("회원 번호: 나중에 자동으로 바꾸자..");
         String memberId = scanner.nextLine();

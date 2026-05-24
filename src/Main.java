@@ -27,8 +27,8 @@ public class Main {
         while (true) {
             printMainMenu();
 
-            int menu = scanner.nextInt();
-            scanner.nextLine();
+            String menuNumber = scanner.nextLine();
+            int menu = Integer.parseInt(menuNumber);
 
             if (menu == 1) {
                 memberRegisterScreen.show(scanner, library);

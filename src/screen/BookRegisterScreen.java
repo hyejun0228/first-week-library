@@ -1,9 +1,9 @@
 package screen;
 
+import java.util.Scanner;
+
 import model.Book;
 import model.Library;
-
-import java.util.Scanner;
 
 public class BookRegisterScreen {
     public void show(Scanner scanner, Library library) {
@@ -23,8 +23,8 @@ public class BookRegisterScreen {
         System.out.println("성인용 책 인가요?");
         System.out.println("1. 네");
         System.out.println("2. 아니요");
-        int isAdultOnly = scanner.nextInt();
-        scanner.nextLine();
+        String isAdultOnlyString = scanner.nextLine();
+        int isAdultOnly = Integer.parseInt(isAdultOnlyString);
 
         if (isAdultOnly == 1) {
             Book book = new Book(bookId, title, author, true);
