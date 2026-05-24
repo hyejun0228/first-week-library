@@ -6,11 +6,25 @@ public class Library {
     private ArrayList<Book> books;
     private ArrayList<Member> members;
     private ArrayList<Reservation> reservations;
+    private int memberIdSequence;
+    private int bookIdSequence;
 
     public Library() {
         books = new ArrayList<>();
         members = new ArrayList<>();
         reservations = new ArrayList<>();
+        memberIdSequence = 1;
+        bookIdSequence = 1;
+    }
+
+    public String createMemberId() {
+        String memberId = "" + memberIdSequence++;
+        return memberId;
+    }
+
+    public String createBookId() {
+        String bookId = "" + bookIdSequence++;
+        return bookId;
     }
 
     public void addBook(Book book) {
@@ -101,6 +115,10 @@ public class Library {
             return;
         }
 
+        if(!member.canBorrow(book)) {
+            System.out.println("대여한 도서가 아닙니다.");
+            return;
+        }
 
         member.removeBorrowedBook(book);
         book.returnBook();

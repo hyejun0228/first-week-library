@@ -12,20 +12,26 @@ public class MemberRegisterScreen {
         System.out.println("           회원 등록 화면");
         System.out.println("=================================");
 
-        System.out.println("1. 어린이 회원");
-        System.out.println("2. 어른 회원");
-        System.out.println("회원 종류룰 선택하세요: ");
+        int memberType;
+        while (true){
+            System.out.println("1. 어린이 회원");
+            System.out.println("2. 어른 회원");
+            System.out.println("회원 종류룰 선택하세요: ");
 
-        String memberTypeString = scanner.nextLine();
-        int memberType = Integer.parseInt(memberTypeString);
+            String memberTypeString = scanner.nextLine();
+            memberType = Integer.parseInt(memberTypeString);
 
-        System.out.print("회원 번호: 나중에 자동으로 바꾸자..");
-        String memberId = scanner.nextLine();
-        if (library.findMemberById(memberId) != null) {
-            System.out.println("이미 존재하는 회원 번호입니다.");
-            System.out.println("회원 등록을 취소합니다.");
-            return;
+            try {
+                if (memberType == 1 || memberType == 2) break;
+
+                System.out.println("1 또는 2만 입력해주세요.");
+            } catch (NumberFormatException e) {
+                System.out.println("숫자만 입력해주세요.");
+            }
         }
+
+        String memberId = library.createMemberId();
+        System.out.print("회원 번호: 나중에 자동으로 바꾸자..");
 
         System.out.print("회원 이름: ");
         String name = scanner.nextLine();
@@ -46,7 +52,7 @@ public class MemberRegisterScreen {
             System.out.println("전화번호: " + phoneNumber);
             System.out.println("보호자 이름: " + guardianName);
 
-        } else if (memberType == 2) {
+        } else {
             AdultMember adultMember = new AdultMember(memberId, name, phoneNumber);
             library.addMember(adultMember);
             System.out.println("=================================");
@@ -55,10 +61,7 @@ public class MemberRegisterScreen {
             System.out.println("이름: " + name);
             System.out.println("전화번호: " + phoneNumber);
 
-        } else {
-            System.out.println("잘못된 회원 종류입니다.");
         }
-
         System.out.println();
         System.out.println("메인 화면으로 돌아갑니다.");
     }

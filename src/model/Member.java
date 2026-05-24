@@ -40,12 +40,15 @@ public class Member extends Person {
         borrowedBooks.remove(book);
     }
 
-
     public void showMemberInfo() {
         System.out.println("회원 번호: " + memberId);
         System.out.println("이름: " + name);
         System.out.println("전화번호: " + phoneNumber);
         System.out.println("현재 대여 권수: " + borrowedBooks.size());
         System.out.println("최대 대여 가능 권수: " + maxBorrowLimit);
+    }
+
+    public boolean isBorrowed(Book book) {
+        return borrowedBooks.contains(book);
     }
 }

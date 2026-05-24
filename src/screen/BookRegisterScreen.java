@@ -11,20 +11,31 @@ public class BookRegisterScreen {
         System.out.println("           도서 등록 화면");
         System.out.println("=================================");
 
-        System.out.println("책 번호: 나중에 자동으로..");
-        String bookId = scanner.nextLine();
-
         System.out.println("책 이름: ");
         String title = scanner.nextLine();
 
         System.out.println("작가 이름: ");
         String author = scanner.nextLine();
 
-        System.out.println("성인용 책 인가요?");
-        System.out.println("1. 네");
-        System.out.println("2. 아니요");
-        String isAdultOnlyString = scanner.nextLine();
-        int isAdultOnly = Integer.parseInt(isAdultOnlyString);
+        int isAdultOnly;
+        while (true){
+            System.out.println("성인용 책 인가요?");
+            System.out.println("1. 네");
+            System.out.println("2. 아니요");
+
+            String isAdultOnlyString = scanner.nextLine();
+            isAdultOnly = Integer.parseInt(isAdultOnlyString);
+
+            try {
+                if (isAdultOnly ==1 || isAdultOnly == 2) break;
+
+                System.out.println("1 또는 2만 입력해주세요.");
+            } catch (NegativeArraySizeException e){
+                System.out.println("숫자만 입력해주세요.");
+            }
+        }
+
+        String bookId = library.createBookId();
 
         if (isAdultOnly == 1) {
             Book book = new Book(bookId, title, author, true);
